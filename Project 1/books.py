@@ -74,3 +74,21 @@ async def delete_book(book_title: str):
         if BOOKS[i].get('title').casefold() == book_title.casefold():
             BOOKS.pop(i)
             break
+
+@app.get("/books/byauthor/")
+async def author_by_query(author: str):
+    books_to_return = []
+    for book in BOOKS:
+        if book.get('author').casefold() == author.casefold():
+            books_to_return.append(book)
+    return books_to_return
+
+
+@app.get("/books/byauthor/{author_name}")
+async def fetch_books_by_author(author_name: str):
+    books_to_return = []
+    for book in BOOKS:
+        if book.get('author').casefold() == author_name.casefold():
+            books_to_return.append(book)
+    return books_to_return
+
